@@ -1,16 +1,13 @@
 <?php
-	$con=new mysqli("localhost","root","","img");
-	if(isset($_GET['deleteid']))
+$con=new mysqli("localhost","root","","register");
+ $id=$_GET['id'];
+ $sql="DELETE FROM `admin` WHERE id='$id'";
+ $result=mysqli_query($con,$sql);
+ if($result){
+		header ('location:display.php');
+	}
+	else
 	{
-		$id=$_GET['deleteid'];
-		$sql="DELETE FROM `form` WHERE `id`='$id'";
-		$result=mysqli_query($con,$sql);
-		if($result)
-		{
-			header("location:display.php");
-		}else
-		{
-			echo "no data";
-		}
+		echo 'error';
 	}
 ?>
