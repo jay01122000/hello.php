@@ -1,7 +1,7 @@
 <?php 
 $con=new mysqli("localhost","root","","register");
 	$id=$_GET['id'];
-	$sql="SELECT * FROM `admin`";
+	$sql="SELECT * FROM `admin` where id='$id'";
 	$result=mysqli_query($con,$sql);
 	$row=mysqli_fetch_assoc($result);
 	
