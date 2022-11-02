@@ -1,33 +1,33 @@
-<?php
-   $con=new mysqli("localhost","root","","img");
-   if(isset($_GET['updateid'])){ 
-	$id=$_GET['updateid'];
-	$sql="SELECT * FROM `form` WHERE id='$id'";
+<?php 
+$con=new mysqli("localhost","root","","register");
+	$id=$_GET['id'];
+	$sql="SELECT * FROM `admin`";
 	$result=mysqli_query($con,$sql);
 	$row=mysqli_fetch_assoc($result);
-	 $name=$row['name'];
-	 $coarse=$row['crs'];
-	 $contect=$row['contect'];
-   }
-	if(isset($_POST['name']))
-	{   
-		
-		$name=$_POST['name'];
-		$coarse=$_POST['crs'];
-		$contect=$_POST['contect'];
-		$sql="UPDATE `form` SET  `name`='$name',`coarse`='$coarse',`contect`='$contect' WHERE id=$id";
-		$result=mysqli_query($con,$sql);
-		
-			
-		
-	}
+	
 ?>
+<?php
+
+ 
+  if(isset($_POST['update']))
+  {	
+	  $name=$_POST['name'];
+	  $coarse=$_POST['course'];
+	  $contect=$_POST['contact'];
+	  $sql="UPDATE `admin` SET `name`='$name',`coarse`='$coarse',`contect`='$contect' WHERE id='$id'";
+	  $result=mysqli_query($con,$sql);
+	  if($result){
+		  header ('location:display.php');
+	  }
+  }
+ 
+?>	
+<div class="comtainer my-4 ">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.2/css/bootstrap.rtl.min.css">
-<div class="container mt-3">
-<form action="update.php" method="POST">
-<input type="text" name="name" class="form-control" placeholder="Enter student name" value="<?php echo $name; ?>" required></br>
-<input type="text" name="crs" class="form-control" placeholder=" Enter coarse name" value="<?php echo $coarse;?>" required></br>
-<input type="text" name="contect" class="form-control" placeholder=" Enter contect number" value="<?php echo $contect; ?>" required></br>
-<input type="submit" class="btn btn-info w-25" value="update">
+<form action="" method="POST">
+<input type="text" name="name" placeholder="enter name" class="form-control" value="<?php echo $row['name']; ?>" required><br>
+<input type="text" name="course"  class="form-control"  value="<?php echo $row['coarse']; ?>" placeholder="enter  course name" required><br>
+<input type="text" name="contact"  class="form-control" value="<?php echo $row['contect']; ?>" placeholder="phone number" required><br>
+<input type="submit" name="update" class="btn btn-dark w-100 text-info" value="update">
 </form>
-</div>
+	
